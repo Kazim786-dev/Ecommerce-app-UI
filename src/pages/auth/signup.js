@@ -20,10 +20,14 @@ function SignUpPage() {
     const [password, setPassword] = useState('');
     const [mobile, setMobile] = useState('');
     const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         validateEmail()
+        validatePassword()
+
         // Perform login logic here
         console.log("name="+name)
         console.log('email=' + email);
@@ -32,7 +36,7 @@ function SignUpPage() {
         console.log('email error=' + emailError)
 
         //clear all fields
-        setName(''); setEmail(''); setPassword(''); setMobile('')
+        setName(''); setEmail(''); setPassword(''); setMobile('');
     };
 
     const validateEmail = () => {
@@ -43,6 +47,19 @@ function SignUpPage() {
             setEmailError('');
         }
     };
+
+    const validatePassword = () => {
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasLowercase = /[a-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSymbol = /[!@#$%^&*]/.test(password);
+      
+        if (!(hasUppercase && hasLowercase && hasNumber && hasSymbol)) {
+          setPasswordError('Password must contain a capital letter, small letter, number, and symbol');
+        } else {
+          setPasswordError('');
+        }
+      };
 
     const handleNameChange = (e) => {
         setName(e.target.value);
@@ -96,6 +113,7 @@ function SignUpPage() {
                         value={password}
                         onChange={handlePasswordChange}
                     />
+                     {passwordError && <p className="text-danger">{passwordError}</p>}
                 </Row>
                 <Row className="mt-3">
                     <CustomFormField

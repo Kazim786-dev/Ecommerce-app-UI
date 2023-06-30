@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-function CustomFormField({ controlId, label, type, onBlur, placeholder, value, onChange, children }) {
+function CustomFormField({ className, controlId, label, type, onBlur, placeholder, value, onChange, children }) {
   return (
     <Form.Group controlId={controlId}>
       <Form.Label>{label}</Form.Label>
@@ -11,6 +11,7 @@ function CustomFormField({ controlId, label, type, onBlur, placeholder, value, o
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        required
       />
       {children}
     </Form.Group>

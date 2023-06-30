@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 
 //react-router-dom
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 //components
 import CustomButton from '../../components/button';
@@ -14,23 +14,24 @@ import FormContainer from '../../components/formContainer';
 
 
 //function based component
-function LoginPage() {
+function ForgetPasswordPage() {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [remember, setRemember] = useState(false);
     const [emailError, setEmailError] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         validateEmail()
         // Perform login logic here
         console.log('email=' + email);
-        console.log("password=" + password)
-        console.log("rememberMe=" + remember)
         console.log('email error=' + emailError)
 
         //clear all fields
-        setEmail(''); setPassword(''); setRemember(false)
+        setEmail('');
+        if(emailError===''){
+            navigate('/new-pass')
+        }
     };
 
     const validateEmail = () => {
@@ -42,16 +43,12 @@ function LoginPage() {
         }
     };
 
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
-
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
 
     return (
-        <FormContainer heading="Login">
+        <FormContainer heading="Forgot Password">
             <Form onSubmit={handleSubmit}>
                 <Row>
                     <CustomFormField
@@ -66,34 +63,15 @@ function LoginPage() {
                     {emailError && <p className="text-danger">{emailError}</p>}
 
                 </Row>
-                <Row className="mt-3">
-                    <CustomFormField
-                        controlId="password"
-                        label="Password"
-                        type="password"
-                        placeholder="Please enter password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-                </Row>
-                <Row className="mt-2">
-                    <Form.Group controlId="remember" className="mb-3">
-                        <Form.Check type="checkbox" label="Remember me" onChange={(e) => setRemember(e.target.checked)} />
-                    </Form.Group>
-                </Row>
+                
                 <Row className='m-0 mt-4'>
                     <CustomButton variant="primary" type="submit" className="w-100">
-                        Login
+                        Forgot Password
                     </CustomButton>
                 </Row>
                 <Row className="mt-3">
                     <Col>
-                        <p className="text-center mb-2">Forgot password! <Link to='/forget-pass' className="text-decoration-none">Reset</Link></p>
-                    </Col>
-                </Row>
-                <Row className="mt-3">
-                    <Col>
-                        <p className="text-center mb-0">I don't have an account! <Link to='/signup' className="text-decoration-none">SignUp</Link></p>
+                        <p className="text-center mb-0">No, I remember my password! <Link to='/' className="text-decoration-none">Login</Link></p>
                     </Col>
                 </Row>
             </Form>
@@ -102,4 +80,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default ForgetPasswordPage;

@@ -1,6 +1,14 @@
+
+
 .auth-form-container{
-    margin-top: 100px !important;
-    margin-bottom: 165px !important;
-    margin-left: 379px !important;
-    margin-right: 379px !important;
+    margin-top:6.25rem;
+    margin-bottom: 10.3125rem;
+}
+.form-card{
+    margin-top: 2.8125rem;
+    margin-left: 13.6875rem;
+    margin-right: 23.6875rem;
+    margin-bottom: 10.3125rem;
+    width: 38rem;
+    height: 26.25rem;
 }
