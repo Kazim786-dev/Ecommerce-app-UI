@@ -8,6 +8,7 @@ import { ReactComponent as ArrowUpRight } from '../../static/images/svg/Arrow up
 
 //components
 import DetailsTable from '../../components/table';
+import PaginationComp from '../../components/pagination';
 
 function TotalOrders() {
 
@@ -81,12 +82,12 @@ function TotalOrders() {
             <DetailsTable data={Array(6).fill(...orderItems)} columns={columns} />
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <p>aaa</p>
-                <p>bbb</p>
+                <p>{orderItems.length} Total Count</p>
+                <PaginationComp numOfElementsPerPage={8} url={'/api/data'} />
             </div>
 
 
-            <Modal
+            {/* <Modal
         show={showModal}
         onHide={handleCloseModal}
         dialogClassName="full-screen-modal"
@@ -97,7 +98,6 @@ function TotalOrders() {
           <Modal.Title>My Full Screen Modal</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* Add your modal content here */}
           <p>This is the content of the modal.</p>
         </Modal.Body>
         <Modal.Footer>
@@ -106,7 +106,7 @@ function TotalOrders() {
           </Button>
           <Button variant="primary">Save Changes</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
 
         </Container>
 

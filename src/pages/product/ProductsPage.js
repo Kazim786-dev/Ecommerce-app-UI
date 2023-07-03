@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ProductCard from '../../components/product/ProductCard';
 import { Container, Row, Col, Form } from 'react-bootstrap';
+import PaginationComp from '../../components/pagination';
 
 const products = [
     { id: 1, name: 'Product 1', description: 'This is product 1',image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 10, quantity: 5 },
@@ -96,7 +97,7 @@ function AllProductsPage() {
             {/* <Container fluid className='mt-4 mb-5'> */}
                 <Row style={{margin:"inherit"}}>
                     <Col sm={6} className="d-flex justify-content-start font-styles">{filteredProducts.length} products found in clothing and accessories</Col>
-                    <Col sm={6} className="d-flex justify-content-end">dummy text</Col>
+                    <Col sm={6} className="d-flex justify-content-end"><PaginationComp numOfElementsPerPage={8} url={'/api/data'} /></Col>
                 </Row>
             {/* </Container> */}
             {/* className='ms-2 me-2' */}
