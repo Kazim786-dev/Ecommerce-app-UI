@@ -10,14 +10,19 @@ import { Link,useNavigate } from 'react-router-dom';
 import CustomButton from '../../components/button';
 import CustomFormField from '../../components/form-input-field';
 import FormContainer from '../../components/formContainer';
+import AlertComp from '../../components/alert';
 
 
 
 //function based component
 function ForgetPasswordPage() {
+
+    //states
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
 
+    //object to navigate to different pages
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -71,10 +76,14 @@ function ForgetPasswordPage() {
                 </Row>
                 <Row className="mt-3">
                     <Col>
-                        <p className="text-center mb-0">No, I remember my password! <Link to='/' className="text-decoration-none">Login</Link></p>
+                        <p className="text-center mb-0 text-styles" style={{color:"#5A5F7D", fontSize:"14px"}}>No, I remember my password! <Link to='/' className="text-decoration-none">Login</Link></p>
                     </Col>
                 </Row>
             </Form>
+
+            {showAlert && (
+                <AlertComp variant="success" text="Your account has been created. Instruction sent to your email id." onClose={() => setShowAlert(false)}/>
+            )}
 
         </FormContainer>
     );

@@ -10,18 +10,22 @@ import { Link } from 'react-router-dom';
 import CustomButton from '../../components/button';
 import CustomFormField from '../../components/form-input-field';
 import FormContainer from '../../components/formContainer';
+import AlertComp from '../../components/alert';
 
 
 
 //function based component
 function SignUpPage() {
+
+
+    //states
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [mobile, setMobile] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,8 +39,12 @@ function SignUpPage() {
         console.log("mobile=" + mobile)
         console.log('email error=' + emailError)
 
+        if(passwordError==='' && emailError===''){
+            setShowAlert(true)
+        }
+
         //clear all fields
-        setName(''); setEmail(''); setPassword(''); setMobile('');
+        setName(''); setEmail(''); setPassword(''); setMobile(''); setPasswordError(''); setEmailError('')
     };
 
     const validateEmail = () => {
@@ -136,6 +144,10 @@ function SignUpPage() {
                     </Col>
                 </Row>
             </Form>
+            
+            {showAlert && (
+                <AlertComp variant="success" text="Your account has been created. Instruction sent to your email id." onClose={() => setShowAlert(false)}/>
+            )}
 
         </FormContainer>
     );

@@ -7,25 +7,35 @@ import { Form, Row } from 'react-bootstrap';
 import CustomButton from '../../components/button';
 import CustomFormField from '../../components/form-input-field';
 import FormContainer from '../../components/formContainer';
-
+import AlertComp from '../../components/alert';
 
 
 //function based component
 function NewPassPage() {
+
+    //states
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         validatePassword()
+
         // Perform login logic here
         console.log("password=" + password)
         console.log("confirm password = "+confirmPassword)
         console.log('password error=' + passwordError)
 
+
+        if(passwordError===''){
+            setShowAlert(true)
+        }
+
         //clear all fields
-        setPassword('');
+        setPassword(''); setConfirmPassword('');
     };
 
     const validatePassword = () => {
@@ -37,7 +47,7 @@ function NewPassPage() {
         if (!(hasUppercase && hasLowercase && hasNumber && hasSymbol)) {
           setPasswordError('Password must contain a capital letter, small letter, number, and symbol');
         } else {
-          setPasswordError('');
+            setPasswordError('');
         }
       };
       
@@ -80,6 +90,10 @@ function NewPassPage() {
                     </CustomButton>
                 </Row>
             </Form>
+
+            {showAlert && (
+                <AlertComp variant="success" text="Your password has been updated.  Please check your email." onClose={() => setShowAlert(false)}/>
+            )}
 
         </FormContainer>
     );

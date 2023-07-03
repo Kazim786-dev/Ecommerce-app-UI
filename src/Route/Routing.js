@@ -7,8 +7,8 @@ import LoginPage from "../pages/auth/login";
 import SignUpPage from "../pages/auth/signup";
 import ForgetPasswordPage from "../pages/auth/forget-password";
 import NewPassPage from "../pages/auth/new-password";
-
-
+import CartPage from "../pages/cart/cart";
+import TotalOrders from "../pages/orders/cust-total-orders";
 
 const RouterLinks = () => {
   return (
@@ -19,6 +19,8 @@ const RouterLinks = () => {
         <Route path="/forget-pass" element={<ForgetPasswordPage />} />
         <Route path="/new-pass" element={<NewPassPage />} />
         <Route path="/products" element={<AllProductsPage />} />
+        <Route path="/cart" element={<CartPage/>}></Route>
+        <Route path="/total-orders" element={<TotalOrders/>}></Route>
         <Route path="*" element={<h1>Page Not Found!</h1>} />
       </Routes>
     </BrowserRouter>
