@@ -8,149 +8,152 @@ import { Link } from 'react-router-dom';
 
 //components
 import CustomButton from '../../components/button';
-import CustomFormField from '../../components/form-input-field';
+import FormField from '../../components/form-input-field';
 import FormContainer from '../../components/formContainer';
 import AlertComp from '../../components/alert';
 
-
-
 //function based component
 function SignUpPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    mobile: '',
+  });
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    validateEmail();
+    validatePassword();
 
-    //states
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [mobile, setMobile] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [showAlert, setShowAlert] = useState(false);
+    console.log('formData:', formData);
+    console.log('email error=', emailError);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        validateEmail()
-        validatePassword()
+    if (passwordError === '' && emailError === '') {
+      setShowAlert(true);
+    }
 
-        // Perform login logic here
-        console.log("name="+name)
-        console.log('email=' + email);
-        console.log("password=" + password)
-        console.log("mobile=" + mobile)
-        console.log('email error=' + emailError)
+    setFormData({
+      name: '',
+      email: '',
+      password: '',
+      mobile: '',
+    });
+    setPasswordError('');
+    setEmailError('');
+  };
 
-        if(passwordError==='' && emailError===''){
-            setShowAlert(true)
-        }
+  const validateEmail = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setEmailError('Enter a valid email address');
+    } else {
+      setEmailError('');
+    }
+  };
 
-        //clear all fields
-        setName(''); setEmail(''); setPassword(''); setMobile(''); setPasswordError(''); setEmailError('')
-    };
+  const validatePassword = () => {
+    const hasUppercase = /[A-Z]/.test(formData.password);
+    const hasLowercase = /[a-z]/.test(formData.password);
+    const hasNumber = /\d/.test(formData.password);
+    const hasSymbol = /[!@#$%^&*]/.test(formData.password);
 
-    const validateEmail = () => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            setEmailError('Enter a valid email address');
-        } else {
-            setEmailError('');
-        }
-    };
+    if (!(hasUppercase && hasLowercase && hasNumber && hasSymbol)) {
+      setPasswordError(
+        'Password must contain a capital letter, small letter, number, and symbol'
+      );
+    } else {
+      setPasswordError('');
+    }
+  };
 
-    const validatePassword = () => {
-        const hasUppercase = /[A-Z]/.test(password);
-        const hasLowercase = /[a-z]/.test(password);
-        const hasNumber = /\d/.test(password);
-        const hasSymbol = /[!@#$%^&*]/.test(password);
-      
-        if (!(hasUppercase && hasLowercase && hasNumber && hasSymbol)) {
-          setPasswordError('Password must contain a capital letter, small letter, number, and symbol');
-        } else {
-          setPasswordError('');
-        }
-      };
+  const handleFieldChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-    };
+  return (
+    <FormContainer heading="SignUp">
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <FormField
+            controlId="name"
+            label="Fullname"
+            type="text"
+            placeholder="Fullname"
+            name="name"
+            value={formData.name}
+            onChange={handleFieldChange}
+          />
+        </Row>
+        <Row className="mt-3">
+          <FormField
+            controlId="email"
+            label="Email address"
+            type="text"
+            placeholder="email address"
+            name="email"
+            value={formData.email}
+            onChange={handleFieldChange}
+            onBlur={validateEmail}
+          />
+          {emailError && <p className="text-danger">{emailError}</p>}
+        </Row>
+        <Row className="mt-3">
+          <FormField
+            controlId="password"
+            label="Password"
+            type="password"
+            placeholder="password"
+            name="password"
+            value={formData.password}
+            onChange={handleFieldChange}
+          />
+          {passwordError && <p className="text-danger">{passwordError}</p>}
+        </Row>
+        <Row className="mt-3">
+          <FormField
+            controlId="mobile"
+            label="Mobile"
+            type="number"
+            placeholder="mobile number"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleFieldChange}
+          />
+        </Row>
+        <Row className="m-0 mt-4">
+          <CustomButton variant="primary" type="submit" className="w-100">
+            SignUp
+          </CustomButton>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <p className="text-center mb-0 text-styles">
+              Already have an account!{' '}
+              <Link to="/" className="text-decoration-none">
+                Login
+              </Link>
+            </p>
+          </Col>
+        </Row>
+      </Form>
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
-
-    const handleMobileChange = (e) => {
-        setMobile(e.target.value);
-    };
-    
-
-    return (
-        <FormContainer heading="SignUp">
-            <Form onSubmit={handleSubmit}>
-                <Row>
-                <CustomFormField
-                        controlId="name"
-                        label="Fullname"
-                        type="text"
-                        placeholder="Fullname"
-                        value={name}
-                        onChange={handleNameChange}
-                    />
-                </Row>
-                <Row className="mt-3">
-                    <CustomFormField
-                        controlId="email"
-                        label="Email address"
-                        type="text"
-                        placeholder="email address"
-                        value={email}
-                        onChange={handleEmailChange}
-                        onBlur={validateEmail}
-                    />
-                    {emailError && <p className="text-danger">{emailError}</p>}
-
-                </Row>
-                <Row className="mt-3">
-                    <CustomFormField
-                        controlId="password"
-                        label="Password"
-                        type="password"
-                        placeholder="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-                     {passwordError && <p className="text-danger">{passwordError}</p>}
-                </Row>
-                <Row className="mt-3">
-                    <CustomFormField
-                        controlId="mobile"
-                        label="Mobile"
-                        type="number"
-                        placeholder="mobile number"
-                        value={mobile}
-                        onChange={handleMobileChange}
-                    />
-                </Row>
-                <Row className='m-0 mt-4'>
-                    <CustomButton variant="primary" type="submit" className="w-100">
-                        SignUp
-                    </CustomButton>
-                </Row>
-                <Row className="mt-3">
-                    <Col>
-                        <p className="text-center mb-0 text-styles">Already have an account! <Link to='/' className="text-decoration-none">Login</Link></p>
-                    </Col>
-                </Row>
-            </Form>
-            
-            {showAlert && (
-                <AlertComp variant="success" text="Your account has been created. Instruction sent to your email id." onClose={() => setShowAlert(false)}/>
-            )}
-
-        </FormContainer>
-    );
+      {showAlert && (
+        <AlertComp
+          variant="success"
+          text="Your account has been created. Instruction sent to your email id."
+          onClose={() => setShowAlert(false)}
+        />
+      )}
+    </FormContainer>
+  );
 }
 
 export default SignUpPage;

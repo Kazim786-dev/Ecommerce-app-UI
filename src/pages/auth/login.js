@@ -16,30 +16,40 @@ import AlertComp from '../../components/alert';
 
 //function based component
 function LoginPage() {
-    
+
     //states
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [remember, setRemember] = useState(false);
+    // Create an object to store the form data
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        remember: false,
+    });
     const [emailError, setEmailError] = useState('');
     const [showAlert, setShowAlert] = useState(false);
 
+
+    // Destructure the form data object
+    const { email, password, remember } = formData;
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        validateEmail()
+        validateEmail();
         // Perform login logic here
         console.log('email=' + email);
-        console.log("password=" + password)
-        console.log("rememberMe=" + remember)
-        console.log('email error=' + emailError)
+        console.log('password=' + password);
+        console.log('rememberMe=' + remember);
+        console.log('email error=' + emailError);
 
-
-        if(emailError!==''){
+        if (emailError !== '') {
             setShowAlert(true);
         }
 
-        //clear all fields
-        setEmail(''); setPassword(''); setRemember(false)
+        // Clear all fields by resetting the form data state
+        setFormData({
+            email: '',
+            password: '',
+            remember: false,
+        });
     };
 
     const validateEmail = () => {
@@ -52,11 +62,15 @@ function LoginPage() {
     };
 
     const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
+        setFormData({ ...formData, password: e.target.value });
     };
 
     const handleEmailChange = (e) => {
-        setEmail(e.target.value);
+        setFormData({ ...formData, email: e.target.value });
+    };
+
+    const handleRememberChange = (e) => {
+        setFormData({ ...formData, remember: e.target.checked });
     };
 
     return (
@@ -87,7 +101,7 @@ function LoginPage() {
                 </Row>
                 <Row className="mt-2">
                     <Form.Group controlId="remember" className="mb-3">
-                        <Form.Check className='text-styles' type="checkbox" label="Remember me" onChange={(e) => setRemember(e.target.checked)} />
+                        <Form.Check className='text-styles' type="checkbox" label="Remember me" checked={remember} onChange={handleRememberChange} />
                     </Form.Group>
                 </Row>
                 <Row className='m-0 mt-4'>
@@ -108,9 +122,9 @@ function LoginPage() {
             </Form>
 
             {showAlert && (
-                <AlertComp variant="danger" text="Wrong username password, please enter correct credentials" onClose={() => setShowAlert(false)}/>
+                <AlertComp variant="danger" text="Wrong username password, please enter correct credentials" onClose={() => setShowAlert(false)} />
             )}
-            
+
         </FormContainer>
     );
 }

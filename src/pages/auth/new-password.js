@@ -5,7 +5,7 @@ import { Form, Row } from 'react-bootstrap';
 
 //components
 import CustomButton from '../../components/button';
-import CustomFormField from '../../components/form-input-field';
+import FormField from '../../components/form-input-field';
 import FormContainer from '../../components/formContainer';
 import AlertComp from '../../components/alert';
 
@@ -14,75 +14,87 @@ import AlertComp from '../../components/alert';
 function NewPassPage() {
 
     //states
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const initialState = {
+        password: '',
+        confirmPassword: '',
+    };
+
+    const [formData, setFormData] = useState(initialState);
     const [passwordError, setPasswordError] = useState('');
     const [showAlert, setShowAlert] = useState(false);
 
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        validatePassword()
+        // validatePassword();
 
         // Perform login logic here
-        console.log("password=" + password)
-        console.log("confirm password = "+confirmPassword)
-        console.log('password error=' + passwordError)
+        console.log('password=' + formData.password);
+        console.log('confirm password = ' + formData.confirmPassword);
+        console.log('password error=' + passwordError);
 
-
-        if(passwordError===''){
-            setShowAlert(true)
+        if (validatePassword()) {
+            setShowAlert(true);
         }
 
-        //clear all fields
-        setPassword(''); setConfirmPassword('');
+        // Clear all fields
+        setFormData(initialState);
     };
 
+
     const validatePassword = () => {
+        const { password } = formData;
         const hasUppercase = /[A-Z]/.test(password);
         const hasLowercase = /[a-z]/.test(password);
         const hasNumber = /\d/.test(password);
         const hasSymbol = /[!@#$%^&*]/.test(password);
-      
+
         if (!(hasUppercase && hasLowercase && hasNumber && hasSymbol)) {
-          setPasswordError('Password must contain a capital letter, small letter, number, and symbol');
+            setPasswordError('Password must contain a capital letter, small letter, number, and symbol');
+            return false;
         } else {
             setPasswordError('');
+            return true;
         }
-      };
-      
+    };
+
+
 
     const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
+        setFormData({ ...formData, password: e.target.value });
     };
 
     const handleConfirmPasswordChange = (e) => {
-        setConfirmPassword(e.target.value);
+        setFormData({ ...formData, confirmPassword: e.target.value });
     };
+
 
     return (
         <FormContainer heading="New Password">
             <Form onSubmit={handleSubmit}>
                 <Row className="mt-3">
-                    <CustomFormField
+                    <FormField
                         controlId="password"
                         label="Enter new Password"
                         type="password"
                         placeholder="enter password"
-                        value={password}
+                        value={formData.password}
                         onChange={handlePasswordChange}
                     />
+
                     {passwordError && <p className="text-danger">{passwordError}</p>}
                 </Row>
                 <Row className="mt-3">
-                    <CustomFormField
+                    <FormField
                         controlId="confirmPassword"
                         label="Confirm Password"
                         type="password"
                         placeholder="confirm password"
-                        value={confirmPassword}
+                        value={formData.confirmPassword}
                         onChange={handleConfirmPasswordChange}
                     />
+
                 </Row>
                 <Row className='m-0 mt-4'>
                     <CustomButton variant="primary" type="submit" className="w-100">
@@ -92,7 +104,7 @@ function NewPassPage() {
             </Form>
 
             {showAlert && (
-                <AlertComp variant="success" text="Your password has been updated.  Please check your email." onClose={() => setShowAlert(false)}/>
+                <AlertComp variant="success" text="Your password has been updated.  Please check your email." onClose={() => setShowAlert(false)} />
             )}
 
         </FormContainer>

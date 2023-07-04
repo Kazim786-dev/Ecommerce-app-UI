@@ -49,7 +49,7 @@ function AllProductsPage() {
         const item = filteredProducts.find((p)=>p.id===product.id)
         setCartItems((prevCartItems) => [...prevCartItems, item]);
       };
-//className="px-5"
+
     return (
         <Container fluid className='pt-0 p-5'>
             

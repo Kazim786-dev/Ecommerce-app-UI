@@ -1,13 +1,14 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-function CustomFormField({ className, controlId, label, type, onBlur, placeholder, value, onChange, children }) {
+function FormField({ className, controlId, label, name, value, type, onBlur, placeholder, onChange, children }) {
   return (
     <Form.Group controlId={controlId}>
-      <Form.Label className='text-styles' style={{color:"#212529"}}>{label}</Form.Label>
+      <Form.Label className='text-styles input-field' >{label}</Form.Label>
       <Form.Control
         type={type}
         placeholder={placeholder}
+        name={name}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
@@ -18,4 +19,4 @@ function CustomFormField({ className, controlId, label, type, onBlur, placeholde
   );
 }
 
-export default CustomFormField;
+export default FormField;
