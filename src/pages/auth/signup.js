@@ -140,7 +140,7 @@ function SignUpPage() {
                 </Row>
                 <Row className="mt-3">
                     <Col>
-                        <p className="text-center mb-0">Already have an account! <Link to='/' className="text-decoration-none">Login</Link></p>
+                        <p className="text-center mb-0 text-styles">Already have an account! <Link to='/' className="text-decoration-none">Login</Link></p>
                     </Col>
                 </Row>
             </Form>

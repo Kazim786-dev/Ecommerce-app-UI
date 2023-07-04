@@ -58,7 +58,7 @@ const PaginationComp = ({ pageSize,url }) => {
 
   return (
     
-        <Pagination size="md">
+        <Pagination size="md" className="m-0">
           <Pagination.Item onClick={()=>previousPage()}>Previous</Pagination.Item>
           
           {renderItems()}

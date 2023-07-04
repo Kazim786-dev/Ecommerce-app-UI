@@ -76,7 +76,7 @@ function ForgetPasswordPage() {
                 </Row>
                 <Row className="mt-3">
                     <Col>
-                        <p className="text-center mb-0 text-styles" style={{color:"#5A5F7D", fontSize:"14px"}}>No, I remember my password! <Link to='/' className="text-decoration-none">Login</Link></p>
+                        <p className="text-center mb-0 text-styles">No, I remember my password! <Link to='/' className="text-decoration-none">Login</Link></p>
                     </Col>
                 </Row>
             </Form>

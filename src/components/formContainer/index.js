@@ -5,7 +5,7 @@ function FormContainer({ children, heading }) {
   return (
     <Container className='auth-form-container'>
       <div className="text-center text-primary">
-        <h2 className='heading-styles' style={{fontSize:"32px"}}>{heading}</h2>
+        <h2>{heading}</h2>
       </div>
       <div className="d-flex justify-content-center align-items-center">
         <Card className="w-50 p-4 pt-3 mt-3">

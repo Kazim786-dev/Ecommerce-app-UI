@@ -54,7 +54,7 @@ function TotalOrders() {
             header: "Action",
             render: (item) => (
                 <>
-                    <button onClick={handleButtonClick} style={{backgroundColor:"inherit", border:"none"}}><ArrowUpRight/></button>
+                    <button className="bg-white border-0" onClick={handleButtonClick}><ArrowUpRight/></button>
                 </>
             ),
         },
@@ -75,13 +75,13 @@ function TotalOrders() {
 
         <Container fluid className="pt-0 p-5">
             <div className="d-flex align-items-center heading-container">
-                <Link to='/products'><ArrowLeft style={{ cursor: "pointer" }} /></Link>
+                <Link to='/products'><ArrowLeft/></Link>
                 <h1 className="cart-heading" style={{ margin: "0px", paddingLeft: "8px" }}>Orders</h1>
             </div>
 
-            <DetailsTable data={Array(6).fill(...orderItems)} columns={columns} />
+            <DetailsTable data={Array(11).fill(...orderItems)} columns={columns} />
 
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="d-flex justify-content-between align-items-center pt-3" >
                 <p>{orderItems.length} Total Count</p>
                 <PaginationComp numOfElementsPerPage={8} url={'/api/data'} />
             </div>

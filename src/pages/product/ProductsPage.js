@@ -51,33 +51,28 @@ function AllProductsPage() {
       };
 //className="px-5"
     return (
-        <Container fluid className='ps-4 pe-4'>
-
-            {/*container having header and filters  className='ms-2 me-2' */}
+        <Container fluid className='pt-0 p-5'>
             
-                <Row className="mb-3" style={{margin:"inherit"}}>
-                    <Col className="d-flex justify-content-start ">
-                        <h2 className="heading-styles" style={{fontSize:"24px"}}>All Products</h2>
-                    </Col>
-                    <Col md="auto" className="d-flex align-items-center">
-                        <Form.Label className="me-2"><b>Search:</b></Form.Label>
-                        <Form.Group className="mb-1">
-                            <Form.Control type="text" placeholder="Search by name" value={searchTerm} onChange={handleSearchChange} />
-                        </Form.Group>
-                    </Col>
-                    <Col md="auto" className="d-flex align-items-center">
-                        <Form.Label className="me-2"><b>Sort by:</b></Form.Label>
-                        <Form.Group className="mb-1">
-                            <Form.Select value={priceFilter} onChange={handlePriceFilterChange}>
-                                <option value="LowToHigh">Low to High</option>
-                                <option value="HighToLow">High to Low</option>
-                            </Form.Select>
-                        </Form.Group>
-                    </Col>
-                </Row>
-
-
-
+            <Row className="mb-3 m-0 ps-1 pe-1" >
+                <Col className="d-flex justify-content-start ps-0">
+                    <h2 className="text-primary">All Products</h2>
+                </Col>
+                <Col md="auto" className="d-flex align-items-center">
+                    <Form.Label className="me-2"><b>Search:</b></Form.Label>
+                    <Form.Group className="mb-1">
+                        <Form.Control type="text" placeholder="Search by name" value={searchTerm} onChange={handleSearchChange} />
+                    </Form.Group>
+                </Col>
+                <Col md="auto" className="d-flex align-items-center pe-0">
+                    <Form.Label className="me-2"><b>Sort by:</b></Form.Label>
+                    <Form.Group className="mb-1">
+                        <Form.Select value={priceFilter} onChange={handlePriceFilterChange}>
+                            <option value="LowToHigh">Low to High</option>
+                            <option value="HighToLow">High to Low</option>
+                        </Form.Select>
+                    </Form.Group>
+                </Col>
+            </Row>
 
             {/*Map all the products */}
             <Row className="justify-content-center">
@@ -94,17 +89,10 @@ function AllProductsPage() {
                 
             </Row>
 
-            {/* <Container fluid className='mt-4 mb-5'> */}
-                <Row style={{margin:"inherit"}}>
-                    <Col sm={6} className="d-flex justify-content-start font-styles">{filteredProducts.length} products found in clothing and accessories</Col>
-                    <Col sm={6} className="d-flex justify-content-end"><PaginationComp numOfElementsPerPage={8} url={'/api/data'} /></Col>
-                </Row>
-            {/* </Container> */}
-            {/* className='ms-2 me-2' */}
-            {/* <div  style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <p className='text-secondary'>{filteredProducts.length} products found in clothing and accessories</p>
-                <p>dummy text</p>
-            </div> */}
+            <Row className="m-0 align-items-center ps-1 pe-1">
+                <Col sm={6} className="d-flex justify-content-start text-styles ps-0">{filteredProducts.length} products found in clothing and accessories</Col>
+                <Col sm={6} className="d-flex justify-content-end pe-0"><PaginationComp numOfElementsPerPage={8} url={'/api/data'} /></Col>
+            </Row>
 
         </Container>
     );
