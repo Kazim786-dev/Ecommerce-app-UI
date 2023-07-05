@@ -34,6 +34,16 @@
 }
 
 
+/* nav bar */
+
+.navbar-heading {
+  font-size: 16px;
+font-family: Inter;
+font-style: normal;
+font-weight: 700;
+color: #343A40;
+}
+
 /* product card */
 
 .product-card {
@@ -60,7 +70,7 @@
 
 
 .heading-container{
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.2rem;
 }
 
 .table tbody tr {
