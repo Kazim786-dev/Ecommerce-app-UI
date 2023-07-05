@@ -1,9 +1,7 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { Row, Col, Card, Button } from 'react-bootstrap';
 
-function ProductCard({ product, addToCart }) {
+const ProductCard = ({ product, addToCart }) => {
   return (
 
     <Card className="product-card py-3 px-3 pb-0">

@@ -1,7 +1,11 @@
 import React from 'react';
 import { Table} from 'react-bootstrap';
 
-const DetailsTable = ({ data, columns,className }) => {
+const DetailsTable = ({ 
+  data, 
+  columns,
+  className }) => {
+    
   return (
     <Table borderless responsive>
       <thead>

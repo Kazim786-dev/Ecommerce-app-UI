@@ -7,12 +7,10 @@ import { Form, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 //components
-import CustomButton from '../../components/button';
-import CustomFormField from '../../components/form-input-field';
-import FormContainer from '../../components/formContainer';
 import AlertComp from '../../components/alert';
-
-
+import CustomButton from '../../components/button';
+import FormField from '../../components/input-field';
+import FormContainer from '../../components/formContainer';
 
 //function based component
 function LoginPage() {
@@ -27,18 +25,12 @@ function LoginPage() {
     const [emailError, setEmailError] = useState('');
     const [showAlert, setShowAlert] = useState(false);
 
-
     // Destructure the form data object
     const { email, password, remember } = formData;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        validateEmail();
         // Perform login logic here
-        console.log('email=' + email);
-        console.log('password=' + password);
-        console.log('rememberMe=' + remember);
-        console.log('email error=' + emailError);
 
         if (emailError !== '') {
             setShowAlert(true);
@@ -61,47 +53,44 @@ function LoginPage() {
         }
     };
 
-    const handlePasswordChange = (e) => {
-        setFormData({ ...formData, password: e.target.value });
-    };
-
-    const handleEmailChange = (e) => {
-        setFormData({ ...formData, email: e.target.value });
-    };
-
-    const handleRememberChange = (e) => {
-        setFormData({ ...formData, remember: e.target.checked });
+    const handleFieldChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ 
+            ...formData, 
+            [name]: value, });
     };
 
     return (
         <FormContainer heading="Login">
             <Form onSubmit={handleSubmit}>
                 <Row>
-                    <CustomFormField
+                    <FormField
                         controlId="email"
                         label="Enter email address"
                         type="text"
                         placeholder="Please enter your email"
+                        name="email"
                         value={email}
-                        onChange={handleEmailChange}
+                        onChange={handleFieldChange}
                         onBlur={validateEmail}
                     />
                     {emailError && <p className="text-danger">{emailError}</p>}
 
                 </Row>
                 <Row className="mt-3">
-                    <CustomFormField
+                    <FormField
                         controlId="password"
                         label="Password"
                         type="password"
                         placeholder="Please enter password"
+                        name="password"
                         value={password}
-                        onChange={handlePasswordChange}
+                        onChange={handleFieldChange}
                     />
                 </Row>
                 <Row className="mt-2">
                     <Form.Group controlId="remember" className="mb-3">
-                        <Form.Check className='text-styles' type="checkbox" label="Remember me" checked={remember} onChange={handleRememberChange} />
+                        <Form.Check className='text-styles' type="checkbox" name="remember" label="Remember me" checked={remember} onChange={handleFieldChange} />
                     </Form.Group>
                 </Row>
                 <Row className='m-0 mt-4'>

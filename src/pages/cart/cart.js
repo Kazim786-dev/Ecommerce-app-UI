@@ -1,18 +1,21 @@
 import { React, useState, useMemo } from 'react';
+
 import { Container, Form, Image } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
+
 //svg
-import { ReactComponent as ColorIcon } from '../../static/images/svg/Ellipse 1.svg';
-import { ReactComponent as Increase } from '../../static/images/svg/Plus.svg';
-import { ReactComponent as Decrease } from '../../static/images/svg/Minus.svg';
-import { ReactComponent as Trash } from '../../static/images/svg/Trash.svg';
 import { ReactComponent as ArrowLeft } from '../../static/images/svg/Arrow left.svg';
+import { ReactComponent as ColorIcon } from '../../static/images/svg/Ellipse 1.svg';
+import { ReactComponent as Decrease } from '../../static/images/svg/Minus.svg';
+import { ReactComponent as Increase } from '../../static/images/svg/Plus.svg';
+import { ReactComponent as Trash } from '../../static/images/svg/Trash.svg';
+
 
 //components
+import AlertComp from '../../components/alert';
 import CustomButton from '../../components/button';
 import CartTable from '../../components/table';
 import DeleteConfirmationModal from '../../components/modal/delete-confirmation';
-import AlertComp from '../../components/alert';
 
 function ShoppingCart() {
 

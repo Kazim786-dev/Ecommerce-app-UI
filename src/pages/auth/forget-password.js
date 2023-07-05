@@ -7,12 +7,10 @@ import { Form, Row, Col } from 'react-bootstrap';
 import { Link,useNavigate } from 'react-router-dom';
 
 //components
-import CustomButton from '../../components/button';
-import CustomFormField from '../../components/form-input-field';
-import FormContainer from '../../components/formContainer';
 import AlertComp from '../../components/alert';
-
-
+import CustomButton from '../../components/button';
+import FormField from '../../components/input-field';
+import FormContainer from '../../components/formContainer';
 
 //function based component
 function ForgetPasswordPage() {
@@ -27,10 +25,7 @@ function ForgetPasswordPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        validateEmail()
         // Perform login logic here
-        console.log('email=' + email);
-        console.log('email error=' + emailError)
 
         //clear all fields
         setEmail('');
@@ -56,7 +51,7 @@ function ForgetPasswordPage() {
         <FormContainer heading="Forgot Password">
             <Form onSubmit={handleSubmit}>
                 <Row>
-                    <CustomFormField
+                    <FormField
                         controlId="email"
                         label="Enter email address"
                         type="text"

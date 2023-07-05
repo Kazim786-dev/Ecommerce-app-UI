@@ -4,7 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './static/css/styles.css'
 //Routes
-import RouterLinks from './Route/Routing';
+import RouterLinks from './route/routing';
 
 function App() {
   return (

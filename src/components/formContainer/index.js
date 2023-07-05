@@ -1,7 +1,10 @@
 import React from 'react';
 import { Container, Card } from 'react-bootstrap';
 
-function FormContainer({ children, heading }) {
+const FormContainer = ({ 
+  children, 
+  heading }) => {
+    
   return (
     <Container className='auth-form-container'>
       <div className="text-center text-primary">

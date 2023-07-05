@@ -1,10 +1,23 @@
 import React from 'react';
+
+//react-bootstrap
 import { Form } from 'react-bootstrap';
 
-function FormField({ className, controlId, label, name, value, type, onBlur, placeholder, onChange, children }) {
+const FormField = ({ 
+  className, 
+  controlId, 
+  label, 
+  name, 
+  value, 
+  type, 
+  onBlur, 
+  placeholder, 
+  onChange, 
+  children }) => {
+    
   return (
     <Form.Group controlId={controlId}>
-      <Form.Label className='text-styles input-field' >{label}</Form.Label>
+      <Form.Label className="text-styles input-field">{label}</Form.Label>
       <Form.Control
         type={type}
         placeholder={placeholder}

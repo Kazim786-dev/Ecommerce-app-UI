@@ -1,58 +1,61 @@
 import React, { useState } from 'react';
-import ProductCard from '../../components/product/ProductCard';
+
+//react-bootstrap
 import { Container, Row, Col, Form } from 'react-bootstrap';
+
+//components
 import PaginationComp from '../../components/pagination';
+import ProductCard from '../../components/product/ProductCard';
 
 const products = [
-    { id: 1, name: 'Product 1', description: 'This is product 1',image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 10, quantity: 5 },
-    { id: 2, name: 'Product 2', description: 'This is product 2',image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 20, quantity: 0 },
-    { id: 3, name: 'Product 3', description: 'This is product 3',image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 30, quantity: 2 },
-    { id: 4, name: 'Product 4', description: 'This is product 4',image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 40, quantity: 4 },
-    { id: 5, name: 'Product 1', description: 'This is product 1',image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 10, quantity: 5 },
-    { id: 6, name: 'Product 2', description: 'This is product 2',image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 20, quantity: 0 },
-    { id: 7, name: 'Product 3', description: 'This is product 3',image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 30, quantity: 2 },
-    { id: 8, name: 'Product 4', description: 'This is product 4',image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 40, quantity: 4 },
+    { id: 1, name: 'Product 1', description: 'This is product 1', image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 10, quantity: 5 },
+    { id: 2, name: 'Product 2', description: 'This is product 2', image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 20, quantity: 0 },
+    { id: 3, name: 'Product 3', description: 'This is product 3', image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 30, quantity: 2 },
+    { id: 4, name: 'Product 4', description: 'This is product 4', image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 40, quantity: 4 },
+    { id: 5, name: 'Product 1', description: 'This is product 1', image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 10, quantity: 5 },
+    { id: 6, name: 'Product 2', description: 'This is product 2', image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 20, quantity: 0 },
+    { id: 7, name: 'Product 3', description: 'This is product 3', image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 30, quantity: 2 },
+    { id: 8, name: 'Product 4', description: 'This is product 4', image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80", price: 40, quantity: 4 },
     // Add more products as needed
 ];
 
 function AllProductsPage() {
 
-
     //states
     const [searchTerm, setSearchTerm] = useState('');
-  const [priceFilter, setPriceFilter] = useState('');
-  const [cartItems, setCartItems] = useState([]);
+    const [priceFilter, setPriceFilter] = useState('');
+    const [cartItems, setCartItems] = useState([]);
 
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
 
-  const handlePriceFilterChange = (event) => {
-    setPriceFilter(event.target.value);
-  };
+    const handlePriceFilterChange = (event) => {
+        setPriceFilter(event.target.value);
+    };
 
-  const filteredProducts = products
-    .filter((product) => {
-      const nameMatch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
-      return nameMatch;
-    })
-    .sort((a, b) => {
-      if (priceFilter === 'HighToLow') {
-        return b.price - a.price; // Sort in descending order (high to low)
-      } else {
-        return a.price - b.price; // Sort in ascending order (low to high)
-      }
-    });
+    const filteredProducts = products
+        .filter((product) => {
+            const nameMatch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+            return nameMatch;
+        })
+        .sort((a, b) => {
+            if (priceFilter === 'HighToLow') {
+                return b.price - a.price; // Sort in descending order (high to low)
+            } else {
+                return a.price - b.price; // Sort in ascending order (low to high)
+            }
+        });
 
 
     const addToCart = (product) => {
-        const item = filteredProducts.find((p)=>p.id===product.id)
+        const item = filteredProducts.find((p) => p.id === product.id)
         setCartItems((prevCartItems) => [...prevCartItems, item]);
-      };
+    };
 
     return (
         <Container fluid className='pt-0 p-5'>
-            
+
             <Row className="mb-3 m-0 ps-1 pe-1" >
                 <Col className="d-flex justify-content-start ps-0">
                     <h2 className="text-primary">All Products</h2>
@@ -86,12 +89,12 @@ function AllProductsPage() {
                         </div>
                     </Col>
                 ))}
-                
+
             </Row>
 
             <Row className="m-0 align-items-center ps-1 pe-1">
                 <Col sm={6} className="d-flex justify-content-start text-styles ps-0">{filteredProducts.length} products found in clothing and accessories</Col>
-                <Col sm={6} className="d-flex justify-content-end pe-0"><PaginationComp numOfElementsPerPage={8} url={'/api/data'} /></Col>
+                <Col sm={6} className="d-flex justify-content-end pe-0"><PaginationComp pageSize={8} url={'/api/data'} /></Col>
             </Row>
 
         </Container>

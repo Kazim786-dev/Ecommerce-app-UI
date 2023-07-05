@@ -7,10 +7,10 @@ import { Form, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 //components
-import CustomButton from '../../components/button';
-import FormField from '../../components/form-input-field';
-import FormContainer from '../../components/formContainer';
 import AlertComp from '../../components/alert';
+import CustomButton from '../../components/button';
+import FormField from '../../components/input-field';
+import FormContainer from '../../components/formContainer';
 
 //function based component
 function SignUpPage() {
@@ -26,11 +26,7 @@ function SignUpPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validateEmail();
     validatePassword();
-
-    console.log('formData:', formData);
-    console.log('email error=', emailError);
 
     if (passwordError === '' && emailError === '') {
       setShowAlert(true);

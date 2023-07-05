@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //pages
 import AllProductsPage from "../pages/product/ProductsPage";
-import LoginPage from "../pages/auth/login";
-import SignUpPage from "../pages/auth/signup";
-import ForgetPasswordPage from "../pages/auth/forget-password";
-import NewPassPage from "../pages/auth/new-password";
 import CartPage from "../pages/cart/cart";
+import ForgetPasswordPage from "../pages/auth/forget-password";
+import LoginPage from "../pages/auth/login";
+import NewPassPage from "../pages/auth/new-password";
+import SignUpPage from "../pages/auth/signup";
 import TotalOrders from "../pages/orders/cust-total-orders";
 
 const RouterLinks = () => {

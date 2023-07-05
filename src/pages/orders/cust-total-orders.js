@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { Button, Container, Modal } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 
 //svg
@@ -8,6 +8,7 @@ import { ReactComponent as ArrowUpRight } from '../../static/images/svg/Arrow up
 
 //components
 import DetailsTable from '../../components/table';
+import DrawerComponent from '../../components/drawer';
 import PaginationComp from '../../components/pagination';
 
 function TotalOrders() {
@@ -26,7 +27,6 @@ function TotalOrders() {
     ]
 
     // table column styling
-
     const columns = [
         {
             header: "Date",
@@ -60,53 +60,28 @@ function TotalOrders() {
         },
     ];
 
-    const [showModal, setShowModal] = useState(false);
+    const [show, setShow] = useState(false);
 
     const handleButtonClick = () => {
-      setShowModal(true);
+      setShow(true)
     };
-  
-    const handleCloseModal = () => {
-      setShowModal(false);
-    };
-
 
     return (
 
         <Container fluid className="pt-0 p-5">
             <div className="d-flex align-items-center heading-container">
                 <Link to='/products'><ArrowLeft/></Link>
-                <h1 className="cart-heading" style={{ margin: "0px", paddingLeft: "8px" }}>Orders</h1>
+                <h1 className="cart-heading" >Orders</h1>
             </div>
 
             <DetailsTable data={Array(11).fill(...orderItems)} columns={columns} />
 
             <div className="d-flex justify-content-between align-items-center pt-3" >
                 <p>{orderItems.length} Total Count</p>
-                <PaginationComp numOfElementsPerPage={8} url={'/api/data'} />
+                <PaginationComp pageSize={8} url={'/api/data'} />
             </div>
 
-
-            {/* <Modal
-        show={showModal}
-        onHide={handleCloseModal}
-        dialogClassName="full-screen-modal"
-        animation={true}
-        fullscreen
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>My Full Screen Modal</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>This is the content of the modal.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
-          <Button variant="primary">Save Changes</Button>
-        </Modal.Footer>
-      </Modal> */}
+            {show && <DrawerComponent show={show} setShow={setShow}/>}
 
         </Container>
 

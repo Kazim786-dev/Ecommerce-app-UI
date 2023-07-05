@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 import { Form, Row } from 'react-bootstrap';
 
 //components
-import CustomButton from '../../components/button';
-import FormField from '../../components/form-input-field';
-import FormContainer from '../../components/formContainer';
 import AlertComp from '../../components/alert';
-
+import CustomButton from '../../components/button';
+import FormField from '../../components/input-field';
+import FormContainer from '../../components/formContainer';
 
 //function based component
 function NewPassPage() {
@@ -23,17 +22,10 @@ function NewPassPage() {
     const [passwordError, setPasswordError] = useState('');
     const [showAlert, setShowAlert] = useState(false);
 
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        // validatePassword();
 
         // Perform login logic here
-        console.log('password=' + formData.password);
-        console.log('confirm password = ' + formData.confirmPassword);
-        console.log('password error=' + passwordError);
-
         if (validatePassword()) {
             setShowAlert(true);
         }
@@ -41,7 +33,6 @@ function NewPassPage() {
         // Clear all fields
         setFormData(initialState);
     };
-
 
     const validatePassword = () => {
         const { password } = formData;
@@ -59,16 +50,13 @@ function NewPassPage() {
         }
     };
 
-
-
-    const handlePasswordChange = (e) => {
-        setFormData({ ...formData, password: e.target.value });
+    const handleFieldChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
     };
-
-    const handleConfirmPasswordChange = (e) => {
-        setFormData({ ...formData, confirmPassword: e.target.value });
-    };
-
 
     return (
         <FormContainer heading="New Password">
@@ -79,8 +67,10 @@ function NewPassPage() {
                         label="Enter new Password"
                         type="password"
                         placeholder="enter password"
+                        name="password"
                         value={formData.password}
-                        onChange={handlePasswordChange}
+                        onChange={handleFieldChange}
+                        onBlur={validatePassword}
                     />
 
                     {passwordError && <p className="text-danger">{passwordError}</p>}
@@ -91,8 +81,9 @@ function NewPassPage() {
                         label="Confirm Password"
                         type="password"
                         placeholder="confirm password"
+                        name="confirmPassword"
                         value={formData.confirmPassword}
-                        onChange={handleConfirmPasswordChange}
+                        onChange={handleFieldChange}
                     />
 
                 </Row>

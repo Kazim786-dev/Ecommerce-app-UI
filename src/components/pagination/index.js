@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+
+//react-bootstrap
 import Pagination from "react-bootstrap/Pagination";
 
 const PaginationComp = ({ pageSize,url }) => {
@@ -11,7 +13,7 @@ const PaginationComp = ({ pageSize,url }) => {
     useEffect(() => {
         fetchData();
       }, [currentPage]);
-    
+
       const fetchData = async () => {
         try {
             //api call
