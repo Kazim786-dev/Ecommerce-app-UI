@@ -9,11 +9,18 @@ import { ReactComponent as ArrowUpRight } from '../../static/images/svg/Arrow up
 
 //components
 import DetailsTable from '../../components/table'
-// import DrawerComponent from '../../components/drawer'
-import PaginationComp from '../../components/pagination'
 import NavbarComp from '../../components/navbar'
+import OffCanvasComp from '../../components/offcanvas'
+import PaginationComp from '../../components/pagination'
 
 function TotalOrders() {
+
+	//states
+	const user={
+		name:'Johnson Charles'
+	}
+	const [show, setShow] = useState(false)
+	const [orderItem, setOrderItem] = useState()
 
 	// Sample data for the table
 	const orderItems = [
@@ -50,32 +57,31 @@ function TotalOrders() {
 		{
 			header: 'Amount',
 			width: '17rem',
-			render: (item) => item.Amount.toFixed(2)
+			render: (item) => '$'+item.Amount.toFixed(2)
 		},
 		{
 			header: 'Action',
-			render: () => (
+			render: (item) => (
 				<>
-					<button className="bg-white border-0" onClick={handleButtonClick}><ArrowUpRight/></button>
+					<button className="bg-white border-0" onClick={()=>handleButtonClick(item)}><ArrowUpRight/></button>
 				</>
 			),
 		},
 	]
 
-	const [show, setShow] = useState(false)
-
-	const handleButtonClick = () => {
+	const handleButtonClick = (item) => {
+		setOrderItem(item)
 		setShow(true)
 	}
 
 	return (
 		<>
-			<NavbarComp cartItemsCount={0} loggedIn={true} userName={'Johnson Charles'} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'}/>
+			<NavbarComp cartItemsCount={0} loggedIn={true} userName={user.name} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'}/>
         
 			<Container fluid className="pt-0 p-5">
 				<div className="d-flex align-items-center heading-container">
 					<Link to='/products'><ArrowLeft/></Link>
-					<h1 className="cart-heading" >Orders</h1>
+					<h1 className="cart-heading ms-1" >Orders</h1>
 				</div>
 
 				<DetailsTable data={Array(11).fill(...orderItems)} columns={columns} />
@@ -85,9 +91,8 @@ function TotalOrders() {
 					<PaginationComp pageSize={8} url={'/api/data'} />
 				</div>
 
-				{/* {show && <DrawerComponent show={show} setShow={setShow}/>} */}
-
 			</Container>
+			{show && <OffCanvasComp placement={'end'} show={show} setShow={setShow} orderItem={orderItem} userName={user.name}/>}
 		</>
 
 	)

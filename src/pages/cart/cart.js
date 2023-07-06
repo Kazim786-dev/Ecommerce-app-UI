@@ -111,8 +111,8 @@ function ShoppingCart() {
 			width: '25rem',
 			render: (item) => (
 				<div className="row align-items-center">
-					<div className="col-auto" style={{ paddingRight: '0px' }}>
-						<Image src={item.image} alt="Product" style={{ height: '29.695px', width: '29.695px' }} />
+					<div className="col-auto pe-0">
+						<Image src={item.image} alt="Product" className='table-product-img' />
 					</div>
 					<div className="col">
 						<span>{item.description}</span>

@@ -7,6 +7,7 @@ const DetailsTable = ({
 	columns,
 }) => {
 
+
 	return (
 		<Table borderless responsive>
 			<thead>

@@ -56,6 +56,10 @@ color: #343A40;
   object-fit: fit;
 }
 
+.table-product-img{
+  height: 29.695px;
+    width: 29.695px;
+}
 
 /* cart page */
 
