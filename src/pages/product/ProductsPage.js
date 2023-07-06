@@ -20,7 +20,7 @@ const products = [
 	// Add more products as needed
 ]
 
-function AllProductsPage() {
+function AllProductsPage({ loggedIn, userName }) {
 
 	//states
 	const [searchTerm, setSearchTerm] = useState('')
@@ -56,7 +56,7 @@ function AllProductsPage() {
 
 	return (
 		<>
-			<NavbarComp cartItemsCount={cartItems.length} loggedIn={true} userName={'Johnson Charles'} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'}/>
+			<NavbarComp cartItemsCount={cartItems.length} loggedIn={loggedIn} userName={userName} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'} />
 			<Container fluid className='pt-0 p-5'>
 
 				<Row className="mb-3 m-0 ps-1 pe-1" >

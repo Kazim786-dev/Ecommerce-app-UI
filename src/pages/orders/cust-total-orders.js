@@ -13,12 +13,9 @@ import NavbarComp from '../../components/navbar'
 import OffCanvasComp from '../../components/offcanvas'
 import PaginationComp from '../../components/pagination'
 
-function TotalOrders() {
+function TotalOrders({userName}) {
 
 	//states
-	const user={
-		name:'Johnson Charles'
-	}
 	const [show, setShow] = useState(false)
 	const [orderItem, setOrderItem] = useState()
 
@@ -76,7 +73,7 @@ function TotalOrders() {
 
 	return (
 		<>
-			<NavbarComp cartItemsCount={0} loggedIn={true} userName={user.name} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'}/>
+			<NavbarComp cartItemsCount={0} loggedIn={true} userName={userName} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'}/>
         
 			<Container fluid className="pt-0 p-5">
 				<div className="d-flex align-items-center heading-container">
@@ -92,7 +89,7 @@ function TotalOrders() {
 				</div>
 
 			</Container>
-			{show && <OffCanvasComp placement={'end'} show={show} setShow={setShow} orderItem={orderItem} userName={user.name}/>}
+			{show && <OffCanvasComp placement={'end'} show={show} setShow={setShow} orderItem={orderItem} userName={userName}/>}
 		</>
 
 	)

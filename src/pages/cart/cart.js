@@ -18,7 +18,7 @@ import CartTable from '../../components/table'
 import DeleteConfirmationModal from '../../components/modal/delete-confirmation'
 import NavbarComp from '../../components/navbar'
 
-function ShoppingCart() {
+const ShoppingCart = ({ userName }) => {
 
 	const taxRate = 0.1
 
@@ -176,13 +176,10 @@ function ShoppingCart() {
 		},
 	]
 
-
-
-
 	return (
 
 		<>
-			<NavbarComp cartItemsCount={cartItems.length} loggedIn={true} userName={'Johnson Charles'} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'} />
+			<NavbarComp cartItemsCount={cartItems.length} loggedIn={true} userName={userName} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'} />
 			<Container fluid className="pt-0 p-5">
 				<div className="d-flex align-items-center heading-container">
 					<Link to='/products'><ArrowLeft style={{ cursor: 'pointer' }} /></Link>
@@ -198,7 +195,7 @@ function ShoppingCart() {
 				</div>
 				<div className="d-flex justify-content-end">
 					<CustomButton className="custom-button" variant="primary" type="submit" onClick={handlePlaceOrder}>
-            Place Order
+						Place Order
 					</CustomButton>
 				</div>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 //pages
 import AllProductsPage from '../pages/product/ProductsPage'
@@ -10,17 +10,20 @@ import NewPassPage from '../pages/auth/new-password'
 import SignUpPage from '../pages/auth/signup'
 import TotalOrders from '../pages/orders/cust-total-orders'
 
-const RouterLinks = () => {
+const RouterLinks = ({
+	loggedIn, 
+	userName}) => {
+
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<LoginPage />} />
+				<Route path="/" element={ !loggedIn? <LoginPage /> : <Navigate to='/products'/> } />
 				<Route path="/signup" element={<SignUpPage />} />
 				<Route path="/forget-pass" element={<ForgetPasswordPage />} />
 				<Route path="/new-pass" element={<NewPassPage />} />
-				<Route path="/products" element={<AllProductsPage />} />
-				<Route path="/cart" element={<CartPage/>}></Route>
-				<Route path="/total-orders" element={<TotalOrders/>}></Route>
+				<Route path="/products" element={<AllProductsPage loggedIn={true} userName={userName} />} />
+				<Route path="/cart" element={loggedIn? <CartPage userName={userName}/> : <Navigate to='/'/> }></Route>
+				<Route path="/total-orders" element={ loggedIn? <TotalOrders userName={userName}/> : <Navigate to='/'/>}></Route>
 				<Route path="*" element={<h1>Page Not Found!</h1>} />
 			</Routes>
 		</BrowserRouter>

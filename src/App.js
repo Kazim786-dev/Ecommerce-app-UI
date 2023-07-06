@@ -7,9 +7,12 @@ import './static/css/styles.css'
 import RouterLinks from './route/routing'
 
 const App = () => {
+
+	const userName = 'Johnson Charles'
+
 	return (
 		<div className="App">
-			<RouterLinks></RouterLinks>
+			<RouterLinks loggedIn={true} userName={userName}></RouterLinks>
 		</div>
 	)
 }
