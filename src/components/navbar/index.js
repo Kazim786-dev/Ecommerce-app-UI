@@ -35,14 +35,12 @@ const NavbarComp = ({
 					<Nav className="ms-auto align-items-center">
 						<Link to="/cart" className="me-4">
 							<div style={{ position: 'relative' }}>
-								<Bag />
-								{cartItemsCount > 0 && (
-									<Badge bg="primary" className='circle-badge' style={{ position: 'absolute', top: -8, right: -8 }}>
-										{/* <Bag></Bag> */}
-										<text >{cartItemsCount}</text>
+								<Bag/>
+								{cartItemsCount>0 && 
+									<Badge className='position-absolute translate-middle rounded-circle'>{cartItemsCount}
 									</Badge>
+								}
 
-								)}
 							</div>
 						</Link>
 						<Link to="/notifications" className="me-4">
