@@ -1,10 +1,19 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, {useState} from 'react'
 import { Row, Col, Card, Button } from 'react-bootstrap'
 
-const ProductCard = ({ 
-	product, 
+const ProductCard = ({
+	product,
 	addToCart }) => {
+
+	// state to hande if product is added to cart
+	const [addedToCart, setAddedToCart] = useState(false)
+
+	const handleAddToCart = () => {
+		addToCart(product)
+		setAddedToCart(true)
+	}
+
 	return (
 
 		<Card className="product-card py-3 px-3 pb-0">
@@ -13,17 +22,20 @@ const ProductCard = ({
 			<Card.Body className="px-0">
 				<Card.Text className='text-styles' style={{ color: '#212529', fontWeight: '500' }}>{product.description}</Card.Text>
 				<Card.Text className='text-styles' style={{ fontWeight: '700', fontSize: '14px' }}>
-          Price: <span className="heading-styles">${product.price.toFixed(2)}</span>
+					Price: <span className="heading-styles">${product.price.toFixed(2)}</span>
 				</Card.Text>
 				<Row >
-					<Col className='d-flex justify-content-end'>
-						{product.quantity > 0 ? (
-							<Button variant="primary" onClick={() => addToCart(product)}>Add to Cart</Button>
-						) : (
-							<Button variant="outline-danger" disabled>
-                Out Of Stock
+					<Col className="d-flex justify-content-end">
+						{addedToCart ? (
+							<Button variant="primary" disabled>
+								Already added
 							</Button>
-						)}</Col>
+						) : (
+							<Button variant="primary" onClick={handleAddToCart}>
+								Add to Cart
+							</Button>
+						)}
+					</Col>
 				</Row>
 			</Card.Body>
 		</Card>

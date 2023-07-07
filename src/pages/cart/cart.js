@@ -59,7 +59,7 @@ const ShoppingCart = ({ userName }) => {
 	const handleDecrease = (itemId) => {
 		setCartItems((prevItems) =>
 			prevItems.map((item) =>
-				item.id === itemId && item.quantity > 0
+				item.id === itemId && item.quantity > 1
 					? { ...item, quantity: item.quantity - 1 }
 					: item
 			)
