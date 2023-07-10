@@ -12,21 +12,21 @@ const PaginationComp = ({ pageSize, url }) => {
 	const [totalPages, setTotalPages] = useState(10)
 	const [data, setData] = useState([])
 
-	useEffect(() => {
-		fetchData()
-	}, [currentPage])
+	// useEffect(() => {
+	// 	fetchData()
+	// }, [currentPage])
 
-	const fetchData = async () => {
-		try {
-			//api call
-			const response = await fetch(`${url}?page=${currentPage}&size=${pageSize}`)
-			const { totalPages, data } = response.data
-			setTotalPages(totalPages)
-			setData(data)
-		} catch (error) {
-			console.error('Error fetching data:', error)
-		}
-	}
+	// const fetchData = async () => {
+	// 	try {
+	// 		//api call
+	// 		const response = await fetch(`${url}?page=${currentPage}&size=${pageSize}`)
+	// 		const { totalPages, data } = response.data
+	// 		setTotalPages(totalPages)
+	// 		setData(data)
+	// 	} catch (error) {
+	// 		console.error('Error fetching data:', error)
+	// 	}
+	// }
 
 	const goToPage = (page) => {
 		setCurrentPage(page)

@@ -55,7 +55,7 @@ const OffCanvasComp = ({
 			<Offcanvas.Body>
 				<Container fluid className="pt-0 p-3" >
 					<div className="d-flex align-items-center heading-container">
-						<ArrowLeft onClick={() => setShow(false)} />
+						<ArrowLeft onClick={() => setShow(false)} style={{ cursor: 'pointer' }}/>
 						<h3 className='ms-1'>Order Detail</h3>
 					</div>
 					<hr />

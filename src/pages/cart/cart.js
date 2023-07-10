@@ -18,7 +18,12 @@ import CartTable from '../../components/table'
 import DeleteConfirmationModal from '../../components/modal/delete-confirmation'
 import NavbarComp from '../../components/navbar'
 
-const ShoppingCart = ({ userName }) => {
+//redux
+import { remove, increase, decrease } from '../../redux/slice/cart/cart-slice'
+import { useDispatch, useSelector } from 'react-redux'
+
+//component
+const ShoppingCart = ({ user }) => {
 
 	const taxRate = 0.1
 
@@ -27,53 +32,30 @@ const ShoppingCart = ({ userName }) => {
 	const [showDeleteModal, setShowDeleteModal] = useState(false)
 	const [orderPlaced, setOrderPlaced] = useState(false)
 
+	const dispatch = useDispatch()
+	//redux State
+	const cartItems = useSelector((state) => state.cart.products)
+
 	const handlePlaceOrder = () => {
 		// Handle place order logic
 		// Assuming the order placement is successful
 		setOrderPlaced(true)
 	}
 
-	// Sample data for the table
-	const [cartItems, setCartItems] = useState([
-		{ id: 1, name: 'Product 1', color: 'blue', size: 32, description: 'This is product 1', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', price: 10, quantity: 5 },
-		{ id: 2, name: 'Product 2', color: 'blue', size: 32, description: 'This is product 2', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', price: 20, quantity: 0 },
-		{ id: 3, name: 'Product 3', color: 'blue', size: 32, description: 'This is product 3', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', price: 30, quantity: 2 },
-		{ id: 4, name: 'Product 4', color: 'blue', size: 32, description: 'This is product 4', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', price: 40, quantity: 4 },
-		{ id: 5, name: 'Product 1', color: 'blue', size: 32, description: 'This is product 1', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', price: 10, quantity: 5 },
-		{ id: 6, name: 'Product 2', color: 'blue', size: 32, description: 'This is product 2', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', price: 20, quantity: 0 },
-		{ id: 7, name: 'Product 3', color: 'blue', size: 32, description: 'This is product 3', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', price: 30, quantity: 2 },
-		{ id: 8, name: 'Product 4', color: 'blue', size: 32, description: 'This is product 4', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', price: 40, quantity: 4 },
-	])
-
-
 	// Function to handle quantity increase
 	const handleIncrease = (itemId) => {
-		setCartItems((prevItems) =>
-			prevItems.map((item) =>
-				item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-			)
-		)
+		dispatch(increase(itemId))
 	}
 
 	// Function to handle quantity decrease
 	const handleDecrease = (itemId) => {
-		setCartItems((prevItems) =>
-			prevItems.map((item) =>
-				item.id === itemId && item.quantity > 1
-					? { ...item, quantity: item.quantity - 1 }
-					: item
-			)
-		)
+		dispatch(decrease(itemId))
 	}
 
 	// Function to calculate subtotal
 	const calculateSubTotal = useMemo(() => {
 		return cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
 	}, [cartItems])
-
-	// const handleDelete = (itemId) => {
-	//     setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
-	// };
 
 	const total = useMemo(() => {
 		const subTotal = calculateSubTotal
@@ -88,14 +70,14 @@ const ShoppingCart = ({ userName }) => {
 
 	const handleDeleteConfirmation = () => {
 		if (deleteItemId) {
-			setCartItems((prevItems) => prevItems.filter((item) => item.id !== deleteItemId))
+			// setCartItems((prevItems) => prevItems.filter((item) => item.id !== deleteItemId))
+			dispatch(remove(deleteItemId))
 			setDeleteItemId(null)
 			setShowDeleteModal(false)
 		}
 	}
 
 	// table column styling
-
 	const columns = [
 		{
 			header: (
@@ -179,7 +161,7 @@ const ShoppingCart = ({ userName }) => {
 	return (
 
 		<>
-			<NavbarComp cartItemsCount={cartItems.length} loggedIn={true} userName={userName} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'} />
+			<NavbarComp cartItemsCount={cartItems.length} loggedIn={true} name={user.name} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'} />
 			<Container fluid className="pt-0 p-5">
 				<div className="d-flex align-items-center heading-container">
 					<Link to='/products'><ArrowLeft style={{ cursor: 'pointer' }} /></Link>

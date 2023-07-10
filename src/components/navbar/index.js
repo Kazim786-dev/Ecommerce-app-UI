@@ -11,9 +11,8 @@ import { ReactComponent as Bell } from '../../static/images/svg/Bell.svg'
 import NavDropdownComp from '../nav-dropdown'
 
 const NavbarComp = ({ 
-	cartItemsCount, 
-	loggedIn, 
-	userName, 
+	cartItemsCount,
+	name,
 	userPicture }) => {
 
 	//drop down items
@@ -43,12 +42,12 @@ const NavbarComp = ({
 
 							</div>
 						</Link>
-						<Link to="/notifications" className="me-4">
+						<Link to="" className="me-4">
 							<Bell />
 						</Link>
-						{loggedIn ?
+						{!name=='' ?
 							(<>
-								<NavDropdownComp title={<span style={{ color: 'blue' }}>{userName}</span>} items={dropdownItems} />
+								<NavDropdownComp title={<span style={{ color: 'blue' }}>{name}</span>} items={dropdownItems} />
 								<Image
 									src={userPicture}
 									alt="User Image"

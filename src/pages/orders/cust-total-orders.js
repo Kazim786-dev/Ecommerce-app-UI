@@ -9,11 +9,11 @@ import { ReactComponent as ArrowUpRight } from '../../static/images/svg/Arrow up
 
 //components
 import DetailsTable from '../../components/table'
+import Footer from '../../components/footer'
 import NavbarComp from '../../components/navbar'
 import OffCanvasComp from '../../components/offcanvas'
-import PaginationComp from '../../components/pagination'
 
-function TotalOrders({userName}) {
+function TotalOrders({user}) {
 
 	//states
 	const [show, setShow] = useState(false)
@@ -73,7 +73,7 @@ function TotalOrders({userName}) {
 
 	return (
 		<>
-			<NavbarComp cartItemsCount={0} loggedIn={true} userName={userName} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'}/>
+			<NavbarComp cartItemsCount={0} loggedIn={true} name={user.name} userPicture={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'}/>
         
 			<Container fluid className="pt-0 p-5">
 				<div className="d-flex align-items-center heading-container">
@@ -83,13 +83,10 @@ function TotalOrders({userName}) {
 
 				<DetailsTable data={Array(11).fill(...orderItems)} columns={columns} />
 
-				<div className="d-flex justify-content-between align-items-center pt-3" >
-					<p>{orderItems.length} Total Count</p>
-					<PaginationComp pageSize={8} url={'/api/data'} />
-				</div>
+				<Footer className={'d-flex justify-content-between align-items-center pt-3'} text={`${orderItems.length} Total Count`} pageSize={8} url={'/api/data'} />
 
 			</Container>
-			{show && <OffCanvasComp placement={'end'} show={show} setShow={setShow} orderItem={orderItem} userName={userName}/>}
+			{show && <OffCanvasComp placement={'end'} show={show} setShow={setShow} orderItem={orderItem} name={name}/>}
 		</>
 
 	)

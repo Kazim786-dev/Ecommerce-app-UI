@@ -1,17 +1,26 @@
 /* eslint-disable react/prop-types */
 import React, {useState} from 'react'
 import { Row, Col, Card, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const ProductCard = ({
 	product,
-	addToCart }) => {
+	addToCart,
+	name }) => {
+
+
+	const navigate = useNavigate()
 
 	// state to hande if product is added to cart
 	const [addedToCart, setAddedToCart] = useState(false)
 
 	const handleAddToCart = () => {
-		addToCart(product)
-		setAddedToCart(true)
+		if(name=='')
+			navigate('/')
+		else{
+			addToCart(product)
+			setAddedToCart(true)
+		}
 	}
 
 	return (

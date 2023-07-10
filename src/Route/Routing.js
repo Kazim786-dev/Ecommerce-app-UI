@@ -11,19 +11,18 @@ import SignUpPage from '../pages/auth/signup'
 import TotalOrders from '../pages/orders/cust-total-orders'
 
 const RouterLinks = ({
-	loggedIn, 
-	userName}) => {
+	user}) => {
 
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={ !loggedIn? <LoginPage /> : <Navigate to='/products'/> } />
+				<Route path="/" element={ !user.name==''? <Navigate to='/products'/> : <LoginPage /> } />
 				<Route path="/signup" element={<SignUpPage />} />
 				<Route path="/forget-pass" element={<ForgetPasswordPage />} />
 				<Route path="/new-pass" element={<NewPassPage />} />
-				<Route path="/products" element={<AllProductsPage loggedIn={true} userName={userName} />} />
-				<Route path="/cart" element={loggedIn? <CartPage userName={userName}/> : <Navigate to='/'/> }></Route>
-				<Route path="/total-orders" element={ loggedIn? <TotalOrders userName={userName}/> : <Navigate to='/'/>}></Route>
+				<Route path="/products" element={<AllProductsPage user={user} />} />
+				<Route path="/cart" element={!user.name==''? <CartPage user={user}/> : <Navigate to='/'/> }></Route>
+				<Route path="/total-orders" element={ !user.name==''? <TotalOrders user={user}/> : <Navigate to='/'/>}></Route>
 				<Route path="*" element={<h1>Page Not Found!</h1>} />
 			</Routes>
 		</BrowserRouter>

@@ -13,8 +13,12 @@ import CustomButton from '../../components/button'
 import FormField from '../../components/input-field'
 import FormContainer from '../../components/formContainer'
 
+//redux
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../redux/slice/auth/customer-slice'
+
 //function based component
-function LoginPage() {
+const LoginPage = () => {
 
 	//states
 	// Create an object to store the form data
@@ -25,29 +29,33 @@ function LoginPage() {
 	})
 	const [emailError, setEmailError] = useState('')
 	const [showAlert, setShowAlert] = useState(false)
+	const dispatch = useDispatch()
 
 	// Destructure the form data object
 	const { email, password, remember } = formData
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		// Perform login logic here
 
+		// Perform login logic here
 		if (emailError !== '') {
 			setShowAlert(true)
+		} else {
+			dispatch(login({ email, password, name: 'Johnson Charles', mobile: '', token: 'token' }))
 		}
 
 		// Clear all fields by resetting the form data state
-		setFormData({
-			email: '',
-			password: '',
-			remember: false,
-		})
+		// setFormData({
+		// 	email: '',
+		// 	password: '',
+		// 	remember: false,
+		// })
 	}
 
 	const validateEmail = () => {
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 		if (!emailRegex.test(email)) {
+			console.log(email)
 			setEmailError('Enter a valid email address')
 		} else {
 			setEmailError('')
@@ -56,9 +64,10 @@ function LoginPage() {
 
 	const handleFieldChange = (e) => {
 		const { name, value } = e.target
-		setFormData({ 
-			...formData, 
-			[name]: value, })
+		setFormData({
+			...formData,
+			[name]: value,
+		})
 	}
 
 	return (
@@ -96,7 +105,7 @@ function LoginPage() {
 				</Row>
 				<Row className='m-0 mt-4'>
 					<CustomButton variant="primary" type="submit" className="w-100">
-                        Login
+						Login
 					</CustomButton>
 				</Row>
 				<Row className="mt-3">

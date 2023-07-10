@@ -6,13 +6,18 @@ import './static/css/styles.css'
 //Routes
 import RouterLinks from './route/routing'
 
+//redux
+import { useSelector } from 'react-redux'
+
 const App = () => {
 
-	const userName = 'Johnson Charles'
+	// const userName = 'Johnson Charles'
 
+	const customer = useSelector((state)=> state.customer)
+	
 	return (
 		<div className="App">
-			<RouterLinks loggedIn={true} userName={userName}></RouterLinks>
+			<RouterLinks user={customer} ></RouterLinks>
 		</div>
 	)
 }
