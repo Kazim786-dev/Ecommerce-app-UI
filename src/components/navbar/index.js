@@ -10,16 +10,21 @@ import { ReactComponent as Bell } from '../../static/images/svg/Bell.svg'
 //componenets
 import NavDropdownComp from '../nav-dropdown'
 
+// import { logout } from '../../redux/slice/auth/customer-slice'
+import { useDispatch } from 'react-redux'
+
 const NavbarComp = ({ 
 	cartItemsCount,
 	name,
 	userPicture }) => {
 
+	// const dispatch = useDispatch()
+
 	//drop down items
 	const dropdownItems = [
 		{ to: '/total-orders', label: 'Orders' },
 		'divider',
-		{ to: '/', label: 'Logout' }
+		{ to: '/', label: 'Logout', onClick:'()=>dispatch(logout())' }
 	]
 
 

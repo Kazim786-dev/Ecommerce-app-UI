@@ -41,7 +41,7 @@ const AllProductsPage = ({ user }) => {
 
 	//redux state
 	const cartProducts = useSelector((state) => state.cart.products)
-	//redux actions
+	
 	const dispatch = useDispatch()
 
 

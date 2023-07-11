@@ -3,12 +3,7 @@ import React from 'react'
 import { NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-import { logout } from '../../redux/slice/auth/customer-slice'
-import { useDispatch } from 'react-redux'
-
 const NavDropdownComp = ({ title, items }) => {
-
-	const dispatch = useDispatch()
 
 	return (
 		<NavDropdown title={title} id="dropdown-menu">
@@ -21,7 +16,7 @@ const NavDropdownComp = ({ title, items }) => {
 							key={index}
 							as={Link}
 							to={item.to}
-							onClick={()=>dispatch(logout())}
+							onClick={item.onClick}
 						>
 							{item.label}
 						</NavDropdown.Item>
